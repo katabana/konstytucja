@@ -14,3 +14,4 @@ public class Point {
 		return (this.text);
 	}
 }
+

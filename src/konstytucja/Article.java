@@ -10,6 +10,11 @@ public class Article {
 	public String text;
 	public ArrayList<String> points;
 	
+	public Article(int number) {
+		this.number = number;
+		this.text = "";
+	}
+	
 	public Article(int number, String text) {
 		this.number = number;
 		this.text = text;
@@ -18,20 +23,26 @@ public class Article {
 	public ArrayList<Article> readArticle(ArrayList<Article> articles, BufferedReader reader, int number) {
 		try {
 			String line = reader.readLine();
-			Article article = new Article(number, line);
-			
-			int i = 0;
-			String tmp = "";
-			while(line.charAt(i) != ' ') {
-					tmp += line.charAt(i);
-					i++;
+			while(!line.startsWith("Rozdzia") || !line.startsWith("Art")) {
+				Article article = new Article(number, line);
+				
+				int i = 0;
+				String tmp = "";
+				while(line.charAt(i) != ' ') {
+						tmp += line.charAt(i);
+						i++;
+				}
+				if (tmp == (Integer.toString(points.size()+1) + '.')) {
+					points.add(line);
+					//while()
+				}
+				else {
+					article.text += line;
+					article.text += "proba1";
+				}
+				line = reader.readLine();
+				articles.add(article);
 			}
-			if (tmp == (Integer.toString(points.size()+1) + '.')) {
-				points.add(line);
-				//while()
-			}
-			articles.add(article);
-			article.printArticle();
 		} catch (IOException e) {
 			e.getMessage();
 		} finally {
@@ -46,13 +57,13 @@ public class Article {
 		System.out.println(this.text);
 		
 		//prints article's points
-		if(!this.points.isEmpty()) {
+		if(this.points != null && !this.points.isEmpty()) {
 	        Iterator<String> iterator = this.points.iterator();
 	        while (iterator.hasNext()) {
 	            System.out.println(iterator.next().toString());
 	        }
 		}
-		else System.out.print("etwas");
+		else System.out.println("etwasarticle");
 	}
 	
 }

@@ -13,7 +13,7 @@ public class Chapter {
 		this.articles = new ArrayList<>();
 	}
 	
-public String decToRoman(int n){
+public String arabicToRoman(int n){
 	
 		String number = "";
 		while(n > 0){
@@ -59,7 +59,7 @@ public String decToRoman(int n){
 	
 	public void printChapter(){
 		//prints chapter's parts
-		System.out.println("Rozdzial " + decToRoman(this.number));
+		System.out.println("Rozdzial " + arabicToRoman(this.number));
 		System.out.println(this.title);
 		
 		//prints chapter's articles

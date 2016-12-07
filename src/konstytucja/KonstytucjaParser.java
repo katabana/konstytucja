@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+//osobno wczytywanie 
+
 public class KonstytucjaParser {
 	
 	public ArrayList <Chapter> chapters;
@@ -20,7 +22,7 @@ public class KonstytucjaParser {
 		range = args[1];
 	}
 	
-	public void konParser(KonstytucjaParser konstytucja) {
+	public void konParse(KonstytucjaParser konstytucja) {
 		
 		String filePath = konstytucja.filePath;
 		String range = konstytucja.range;
@@ -44,25 +46,33 @@ public class KonstytucjaParser {
 			    	Article article = null;
 			    	int number;
 			    	
-			    	if(line.startsWith("@")) {
-			    	  reader.readLine();
-			    	  line = reader.readLine();
+			    	if (line.startsWith("©")) {
+			    		reader.readLine();
+			    		line = reader.readLine();
+			    		continue;
 			    	}
 			    	if(line.startsWith("Rozdzia")) {
 			    		chapter = new Chapter(chapters.size()+1);
 				    	line = reader.readLine();
 				    	chapter.title = line;
+				    	System.out.println(chapter.title);
 				    	this.chapters.add(chapter);
-				    	System.out.println(chapter.decToRoman(chapter.number));
-				    	reader.readLine();
-				    	line = reader.readLine();
+				    	System.out.println(chapter.arabicToRoman(chapter.number));
+				    	continue;
 			    	}
 				    if(line.startsWith("Art")) {
-				    	number = chapter.articles.size()+1;
-				    	article.readArticle(chapter.articles, reader, number);
-				    	chapter.articles.add(article);
-				    		
+				    	chapter = chapters.get(chapters.size()-1);
+				    	if(chapter.articles != null) {
+				    		System.out.println("czytam artykul");
+					    	number = chapter.articles.size()+1;
+					    	article = new Article(number);
+					    	article.readArticle(chapter.articles, reader, number);
+					    	chapter.articles.add(article);
+					    	article.printArticle();
+					    	continue;
+				    	} 				    		
 				    }
+			    
 			    }
 			    
 			   }

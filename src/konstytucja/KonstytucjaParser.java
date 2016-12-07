@@ -9,11 +9,22 @@ import java.util.Scanner;
 
 public class KonstytucjaParser {
 	
-	public static void main(String[] args) {
+	public ArrayList <Chapter> chapters;
+	public String filePath;
+	public String range;
+	
+	
+	public KonstytucjaParser(String[] args) {
+		chapters = new ArrayList<Chapter>();
+		filePath = args[0];
+		range = args[1];
+	}
+	
+	public void konParser(KonstytucjaParser konstytucja) {
 		
-		String filePath;
-		String range;
-		ArrayList <Chapter> chapters = new ArrayList<>();
+		String filePath = konstytucja.filePath;
+		String range = konstytucja.range;
+		
 		BufferedReader reader = null;
 		
 		/*System.out.println("Enter file path: ");
@@ -22,9 +33,6 @@ public class KonstytucjaParser {
 		range = scanner.nextLine();
 		scanner.close(); */
 		
-		filePath = args[0];
-		range = args[1];
-		
 		try
 		  {
 		    reader = new BufferedReader(new FileReader(filePath + "\\konstytucja.txt"));
@@ -32,21 +40,32 @@ public class KonstytucjaParser {
 		    if(reader != null){
 			    while ((line = reader.readLine()) != null)
 			    {
-			      if(line.startsWith("@")) {
+			    	Chapter chapter = null;
+			    	Article article = null;
+			    	int number;
+			    	
+			    	if(line.startsWith("@")) {
 			    	  reader.readLine();
 			    	  line = reader.readLine();
-			      }
-			      if(line.startsWith("Rozdzia")) {
-			    	  Chapter chapter = new Chapter(chapters.size()+1);
-			    	  line = reader.readLine();
-			    	  chapter.title = line;
-			    	  chapters.add(chapter);
-			    	  System.out.println(chapter.decToRoman(chapter.number));
-			    	  chapter.printChapter();
-			    	  reader.readLine();
-			      }
+			    	}
+			    	if(line.startsWith("Rozdzia")) {
+			    		chapter = new Chapter(chapters.size()+1);
+				    	line = reader.readLine();
+				    	chapter.title = line;
+				    	this.chapters.add(chapter);
+				    	System.out.println(chapter.decToRoman(chapter.number));
+				    	reader.readLine();
+				    	line = reader.readLine();
+			    	}
+				    if(line.startsWith("Art")) {
+				    	number = chapter.articles.size()+1;
+				    	article.readArticle(chapter.articles, reader, number);
+				    	chapter.articles.add(article);
+				    		
+				    }
 			    }
-		    }
+			    
+			   }
 		  } catch (FileNotFoundException e) {
 			    e.printStackTrace();
 		  } catch (IOException e) {

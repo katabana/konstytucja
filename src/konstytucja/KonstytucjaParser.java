@@ -109,9 +109,9 @@ public class KonstytucjaParser {
 					    	artnumber++;
 					    	article = new Article(artnumber);
 					    	chapter.articles.add(article);
-					    	//article.readArticle(chapter.articles, reader, artnumber);
-					    	//article.printArticle();
-					    	//System.out.println();
+					    	article.readArticle(chapter.articles, file, i, artnumber);
+					    	article.printArticle();
+					    	System.out.println("tenartykul");
 					    	i++;
 					    	continue;
 				    	} 				    		

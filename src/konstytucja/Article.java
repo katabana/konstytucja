@@ -25,79 +25,70 @@ public class Article {
 		this.points = new ArrayList<String>();
 	}
 	
-	public ArrayList<Article> readArticle(ArrayList<Article> articles, BufferedReader reader, int number) {
+	public ArrayList<Article> readArticle(ArrayList<Article> articles, ArrayList<String> file, int id, int number) {
 		try {
-			
-			String line = reader.readLine();
-			this.text = line;
-			//System.out.println("tekst artykulu " +this.text);
-			reader.mark(0);
-			//System.out.println("reset readera");			
+			if(id < file.size() && file.get(id) != null) {
+				String line = file.get(id);
+				this.text = line;
+				System.out.println("tekst artykulu " +this.text);
+				
 		
-			while(!line.startsWith("Rozdzia") && !line.startsWith("Art")) {
-				
-				int i = 0;
-				String tmp = "";
-				while(line.charAt(i) != ' ') {
-						tmp += line.charAt(i);
-						i++;
-				}
-				
-								
-				if(tmp.equals(Integer.toString(this.points.size()+1) + '.')) {
-					this.text = "";
-					String tmppoint = line;
-					String nline = line;
-					this.points.add(tmppoint);
-					while(!line.endsWith(".")){
-						
-						if(line.startsWith("©")){
-							reader.readLine();
-							reader.mark(0);
-						} 
-						
-						if(line.endsWith("-")) {
-							line = reader.readLine();
-							nline = nline.substring(0,nline.length()-2) + line;
-							this.points.set(this.points.size()-1, nline);
-						}
-						else {
-							line = reader.readLine();
-							nline += " " + line;
-							this.points.set(this.points.size()-1, nline);
+				while(!line.startsWith("Rozdzia") && !line.startsWith("Art")) {
+					int i = 0;
+					String tmp = "";
+					while(line.charAt(i) != ' ') {
+							tmp += line.charAt(i);
+							i++;
+					}
+									
+					if(tmp.equals(Integer.toString(this.points.size()+1) + '.')) {
+						this.text = "";
+						String tmppoint = line;
+						String nline = line;
+						this.points.add(tmppoint);
+						while(!line.endsWith(".")){
+							
+							if(line.endsWith("-")) {
+								id++;
+								line = file.get(id);
+								nline = nline.substring(0,nline.length()-2) + line;
+								this.points.set(this.points.size()-1, nline);
+							}
+							else {
+								id++;
+								line = file.get(id);
+								nline += " " + line;
+								this.points.set(this.points.size()-1, nline);
+							}
 						}
 					}
-				}
-				else {
-					String nline = line;
-					reader.mark(0);
-					while(!line.endsWith(".")){
-						//line = reader.readLine();
-						//nline += line;
-						if(line.endsWith(":")){
-							this.text = this.text.substring(0,this.text.length()-2 )+":\n";
-						}
-						if(line.endsWith("-")) {
-							//System.out.println(nline);
-							line = reader.readLine();
-							nline = nline.substring(0,nline.length()-2) + line;
-							this.text = nline;
-						}
-						else {
-							line = reader.readLine();
-							nline += " " + line;
-							//this.text = nline;
-							this.text += nline;
+					else {
+						String nline = line;
+						
+						while(!line.endsWith(".")){
+							if(line.endsWith(":")){
+								this.text = this.text.substring(0,this.text.length()-2 )+":\n";
+							}
+							if(line.endsWith("-")) {
+								//System.out.println(nline);
+								line = file.get(id+1);
+								nline = nline.substring(0,nline.length()-2) + line;
+								this.text = nline;
+							}
+							else {
+								id++;
+								line = file.get(id);
+								nline += " " + line;
+								//this.text = nline;
+								this.text += nline;
+							}
 						}
 					}
+					id++;
 				}
-				line = reader.readLine();
 			}
-			reader.reset();
 			
-		} catch (IOException e) {
-			e.getMessage();
-		} finally {
+		}  finally {
 			return articles;
 		}
 		
@@ -106,7 +97,7 @@ public class Article {
 	public void printArticle() {
 		//prints article's parts
 		System.out.println("Art. "+ this.number);
-		//System.out.println(this.text);
+		System.out.println(this.text);
 		
 		//prints article's points
 		if(this.points != null && !this.points.isEmpty()) {

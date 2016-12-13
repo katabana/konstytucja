@@ -22,7 +22,7 @@ public class KonstytucjaParser {
 		range = args[1];
 	}
 	
-	public ArrayList<String> cleanFile (KonstytucjaParser konstytucja) {
+	public ArrayList<String> cleanFile(KonstytucjaParser konstytucja) {
 		String filePath = konstytucja.filePath;
 		String range = konstytucja.range;
 		
@@ -36,8 +36,14 @@ public class KonstytucjaParser {
 		}
 	    try {
 	        String line = null;
+	        while((line = reader.readLine()) != null ){
+	        	if(line.startsWith("Rozdzia")) {
+	        		file.add(line);
+	        		break;
+	        	}
+			}
 			while((line = reader.readLine()) != null) {
-				
+			
 				if (line.startsWith("©")) {
 					reader.readLine();
 					continue;
@@ -48,14 +54,24 @@ public class KonstytucjaParser {
 	    } catch (IOException e) {
 	    	e.getMessage();
 	    }
+	    finally {
+	    	 try{
+				  if (reader != null) 
+					  reader.close();
+			  } catch (IOException e) {
+				  
+}
+	    }
 	    
 	    return file;
 	}
 	
 	public void konParse(KonstytucjaParser konstytucja) {
 		
-		ArrayList<String> file = konstytucja.cleanFile(this);
+		ArrayList<String> file = new ArrayList<String>();
+		file = this.cleanFile(konstytucja);
 		String line = "";
+		int artnumber = 0;
 		
 		/*System.out.println("Enter file path: ");
 		Scanner scanner = new Scanner(System.in);
@@ -64,20 +80,27 @@ public class KonstytucjaParser {
 		scanner.close(); */
 			        
 		if(file != null){
-			for(int i = 0; i < file.size() -1; i++) {
+			int i = 0;
+			System.out.print(file);
+			while(i < file.size() && file.get(i)!= null) {
 					line = file.get(i);
 			    	Chapter chapter = null;
 			    	Article article = null;
 			    	int number;
 			    	
 			    	if(line.startsWith("Rozdzia")) {
-			    		chapter = new Chapter(chapters.size()+1);
-				    	line = reader.readLine();
+			    		System.out.println();
+			    		chapter = new Chapter(this.chapters.size()+1);
+			    		i++;
+			    		if(file.get(i)!=null)
+			    			line = file.get(i);
+			    		
 				    	chapter.title = line;
 				    	this.chapters.add(chapter);
 				    	System.out.println("Rozdział " + chapter.arabicToRoman(chapter.number));
 				    	System.out.println(chapter.title);
-				    	//System.out.println();
+				    	System.out.println();
+				    	i++;
 				    	continue;
 			    	}
 				    if(line.startsWith("Art")) {
@@ -89,26 +112,15 @@ public class KonstytucjaParser {
 					    	//article.readArticle(chapter.articles, reader, artnumber);
 					    	//article.printArticle();
 					    	//System.out.println();
+					    	i++;
 					    	continue;
 				    	} 				    		
 				    }
+				    i++;
 			    
 			    }
 			    
-			   }
-		  } catch (FileNotFoundException e) {
-			    e.printStackTrace();
-		  } catch (IOException e) {
-			  	e.printStackTrace();
-		  } finally {
-			  try{
-				  if (reader != null) 
-					  reader.close();
-			  } catch (IOException e) {
-				  
-			  }
-		
-		  }
+			}
 		return ; 
 	} 
 } 

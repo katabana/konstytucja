@@ -49,7 +49,6 @@ public class KonstytucjaParser {
 			    	
 			    	if (line.startsWith("©")) {
 			    		reader.readLine();
-			    		line = reader.readLine();
 			    		continue;
 			    	}
 			    	if(line.startsWith("Rozdzia")) {

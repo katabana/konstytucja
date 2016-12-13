@@ -29,18 +29,11 @@ public class Article {
 		try {
 			
 			String line = reader.readLine();
-			//System.out.println(line);
 			this.text = line;
 			//System.out.println("tekst artykulu " +this.text);
 			reader.mark(0);
 			//System.out.println("reset readera");			
-	
-			if(line.startsWith("©")){
-				reader.readLine();
-				line = reader.readLine();
-				reader.mark(0);
-			}
-			System.out.println(line);
+		
 			while(!line.startsWith("Rozdzia") && !line.startsWith("Art")) {
 				
 				int i = 0;
@@ -49,9 +42,9 @@ public class Article {
 						tmp += line.charAt(i);
 						i++;
 				}
+				
 				if(line.startsWith("©")){
 					reader.readLine();
-					line = reader.readLine();
 				}
 								
 				if(tmp.equals(Integer.toString(this.points.size()+1) + '.')) {
@@ -60,6 +53,10 @@ public class Article {
 					String nline = line;
 					this.points.add(tmppoint);
 					while(!line.endsWith(".")){
+						
+						if(line.startsWith("©")){
+							reader.readLine();
+						} 
 						
 						if(line.endsWith("-")) {
 							line = reader.readLine();
@@ -79,7 +76,7 @@ public class Article {
 						//line = reader.readLine();
 						//nline += line;
 						if(line.endsWith(":")){
-							this.text.replaceAll(":", ":\n");
+							this.text = this.text.substring(0,this.text.length()-2 )+":\n";
 						}
 						if(line.endsWith("-")) {
 							//System.out.println(nline);
@@ -89,8 +86,9 @@ public class Article {
 						}
 						else {
 							line = reader.readLine();
-							nline +=" " + line;
-							this.text = nline;
+							nline += " " + line;
+							//this.text = nline;
+							this.text += nline;
 						}
 					}
 				}
@@ -109,7 +107,7 @@ public class Article {
 	public void printArticle() {
 		//prints article's parts
 		System.out.println("Art. "+ this.number);
-		System.out.println(this.text);
+		//System.out.println(this.text);
 		
 		//prints article's points
 		if(this.points != null && !this.points.isEmpty()) {

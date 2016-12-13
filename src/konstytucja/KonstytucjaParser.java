@@ -22,12 +22,12 @@ public class KonstytucjaParser {
 		range = args[1];
 	}
 	
-	public String cleanFile (KonstytucjaParser konstytucja) {
+	public ArrayList<String> cleanFile (KonstytucjaParser konstytucja) {
 		String filePath = konstytucja.filePath;
 		String range = konstytucja.range;
 		
 		BufferedReader reader = null;
-		String file = null;
+		ArrayList<String> file = new ArrayList<String>();
 		
 		try{
 		reader = new BufferedReader(new FileReader(filePath + "\\konstytucja.txt"));
@@ -43,34 +43,27 @@ public class KonstytucjaParser {
 					continue;
 				}
 				else
-					file += "\n" + line;
+					file.add(line);
 			}
 	    } catch (IOException e) {
 	    	e.getMessage();
 	    }
 	    
-	    
 	    return file;
 	}
-	/*
+	
 	public void konParse(KonstytucjaParser konstytucja) {
 		
-		
-		String filePath = konstytucja.filePath;
-		String range = konstytucja.range;
-		int artnumber = 0;
+		ArrayList<String> file = konstytucja.cleanFile(this);
 		
 		/*System.out.println("Enter file path: ");
 		Scanner scanner = new Scanner(System.in);
 		filePath = scanner.nextLine();
 		range = scanner.nextLine();
 		scanner.close(); */
-		/*
-		try
-		  {		        
-		    if(reader != null){
-			    while ((line = reader.readLine()) != null)
-			    {
+			        
+		if(file != null){
+			while ((line = file.) != null) {
 			    	Chapter chapter = null;
 			    	Article article = null;
 			    	int number;
@@ -119,5 +112,5 @@ public class KonstytucjaParser {
 		
 		  }
 		return ; 
-	} */
+	} 
 } 

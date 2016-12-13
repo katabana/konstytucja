@@ -37,14 +37,22 @@ public class KonstytucjaParser {
 	    try {
 	        String line = null;
 			while((line = reader.readLine()) != null) {
-	            file += line;
+				
+				if (line.startsWith("©")) {
+					reader.readLine();
+					continue;
+				}
+				else
+					file += "\n" + line;
 			}
 	    } catch (IOException e) {
 	    	e.getMessage();
 	    }
+	    
+	    
 	    return file;
 	}
-	
+	/*
 	public void konParse(KonstytucjaParser konstytucja) {
 		
 		
@@ -57,7 +65,7 @@ public class KonstytucjaParser {
 		filePath = scanner.nextLine();
 		range = scanner.nextLine();
 		scanner.close(); */
-		
+		/*
 		try
 		  {		        
 		    if(reader != null){
@@ -110,6 +118,6 @@ public class KonstytucjaParser {
 			  }
 		
 		  }
-		return ;
-	}
-}
+		return ; 
+	} */
+} 

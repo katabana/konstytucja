@@ -5,7 +5,7 @@ public class Konstytucja {
 	public static void main(String args[]) {
 		
 		KonstytucjaParser konstytucja = new KonstytucjaParser(args);
-		konstytucja.konParse(konstytucja);
+		System.out.println(konstytucja.cleanFile(konstytucja));
 		
 		
 	}

@@ -8,10 +8,10 @@ public class Main {
 		
 		KonstytucjaParser konstytucja = new KonstytucjaParser(args);
 		ArrayList<String> file = konstytucja.cleanFile(konstytucja);
-		for(String i : file) {
-			//System.out.println(i);
+		/*for(String i : file) {
+			System.out.println(i);
 		}
-		System.out.println("indeks 0 "+file.get(0));
+		System.out.println("indeks 0 "+file.get(0));*/
 		konstytucja.konParse(konstytucja);
 		
 	}

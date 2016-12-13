@@ -92,7 +92,7 @@ public class KonstytucjaParser {
 			    		System.out.println();
 			    		chapter = new Chapter(this.chapters.size()+1);
 			    		i++;
-			    		if(file.get(i)!=null)
+			    		if(file.get(i) != null)
 			    			line = file.get(i);
 			    		
 				    	chapter.title = line;
@@ -108,13 +108,13 @@ public class KonstytucjaParser {
 				    	if(chapter.articles != null) {
 					    	artnumber++;
 					    	article = new Article(artnumber);
-					    	chapter.articles.add(article);
-					    	article.readArticle(chapter.articles, file, i, artnumber);
-					    	article.printArticle();
-					    	System.out.println("tenartykul");
+					    	//System.out.println("nowy artykuł " + artnumber);
 					    	i++;
-					    	continue;
-				    	} 				    		
+					    	article = article.readArticle(file, i, artnumber);
+					    	chapter.articles.add(article);
+					    	article.printArticle();
+				    	} 	
+				    	continue;
 				    }
 				    i++;
 			    

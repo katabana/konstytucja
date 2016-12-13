@@ -1,6 +1,5 @@
 package konstytucja;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -25,14 +24,13 @@ public class Article {
 		this.points = new ArrayList<String>();
 	}
 	
-	public ArrayList<Article> readArticle(ArrayList<Article> articles, ArrayList<String> file, int id, int number) {
+	public Article readArticle(ArrayList<String> file, int id, int number) {
 		try {
 			if(id < file.size() && file.get(id) != null) {
 				String line = file.get(id);
 				this.text = line;
-				System.out.println("tekst artykulu " +this.text);
+				//System.out.println("tekst artykulu " + this.text);
 				
-		
 				while(!line.startsWith("Rozdzia") && !line.startsWith("Art")) {
 					int i = 0;
 					String tmp = "";
@@ -49,14 +47,12 @@ public class Article {
 						while(!line.endsWith(".")){
 							
 							if(line.endsWith("-")) {
-								id++;
-								line = file.get(id);
+								line = file.get(id+1);
 								nline = nline.substring(0,nline.length()-2) + line;
 								this.points.set(this.points.size()-1, nline);
 							}
 							else {
-								id++;
-								line = file.get(id);
+								line = file.get(id+1);
 								nline += " " + line;
 								this.points.set(this.points.size()-1, nline);
 							}
@@ -64,32 +60,37 @@ public class Article {
 					}
 					else {
 						String nline = line;
-						
-						while(!line.endsWith(".")){
+						while(!nline.endsWith(".")){
+							id++;
 							if(line.endsWith(":")){
-								this.text = this.text.substring(0,this.text.length()-2 )+":\n";
+								this.text = this.text.substring(0,this.text.length()-2)+":\n";
 							}
 							if(line.endsWith("-")) {
 								//System.out.println(nline);
-								line = file.get(id+1);
+								line = file.get(id);
 								nline = nline.substring(0,nline.length()-2) + line;
 								this.text = nline;
 							}
 							else {
-								id++;
 								line = file.get(id);
 								nline += " " + line;
-								//this.text = nline;
-								this.text += nline;
+								this.text = nline;
 							}
+						
 						}
 					}
+					
 					id++;
-				}
+					line = file.get(id);
+				} 
 			}
 			
-		}  finally {
-			return articles;
+		} catch (NullPointerException e){
+			
+			e.getMessage();
+		}	finally {
+			System.out.println("poza wszystkim");
+			return this;
 		}
 		
 	}

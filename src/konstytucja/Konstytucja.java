@@ -6,7 +6,7 @@ public class Konstytucja {
 		
 		KonstytucjaParser konstytucja = new KonstytucjaParser(args);
 		konstytucja.konParse(konstytucja);
-				
+		
 		
 	}
 }

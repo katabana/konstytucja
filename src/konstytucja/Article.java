@@ -43,9 +43,6 @@ public class Article {
 						i++;
 				}
 				
-				if(line.startsWith("©")){
-					reader.readLine();
-				}
 								
 				if(tmp.equals(Integer.toString(this.points.size()+1) + '.')) {
 					this.text = "";
@@ -56,6 +53,7 @@ public class Article {
 						
 						if(line.startsWith("©")){
 							reader.readLine();
+							reader.mark(0);
 						} 
 						
 						if(line.endsWith("-")) {
@@ -72,6 +70,7 @@ public class Article {
 				}
 				else {
 					String nline = line;
+					reader.mark(0);
 					while(!line.endsWith(".")){
 						//line = reader.readLine();
 						//nline += line;

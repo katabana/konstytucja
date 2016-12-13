@@ -22,13 +22,35 @@ public class KonstytucjaParser {
 		range = args[1];
 	}
 	
+	public String cleanFile (KonstytucjaParser konstytucja) {
+		String filePath = konstytucja.filePath;
+		String range = konstytucja.range;
+		
+		BufferedReader reader = null;
+		String file = null;
+		
+		try{
+		reader = new BufferedReader(new FileReader(filePath + "\\konstytucja.txt"));
+		} catch (FileNotFoundException e) {
+			e.getMessage();
+		}
+	    try {
+	        String line = null;
+			while((line = reader.readLine()) != null) {
+	            file += line;
+			}
+	    } catch (IOException e) {
+	    	e.getMessage();
+	    }
+	    return file;
+	}
+	
 	public void konParse(KonstytucjaParser konstytucja) {
+		
 		
 		String filePath = konstytucja.filePath;
 		String range = konstytucja.range;
 		int artnumber = 0;
-		
-		BufferedReader reader = null;
 		
 		/*System.out.println("Enter file path: ");
 		Scanner scanner = new Scanner(System.in);
@@ -37,9 +59,7 @@ public class KonstytucjaParser {
 		scanner.close(); */
 		
 		try
-		  {
-		    reader = new BufferedReader(new FileReader(filePath + "\\konstytucja.txt"));
-		    String line;
+		  {		        
 		    if(reader != null){
 			    while ((line = reader.readLine()) != null)
 			    {
@@ -56,9 +76,9 @@ public class KonstytucjaParser {
 				    	line = reader.readLine();
 				    	chapter.title = line;
 				    	this.chapters.add(chapter);
-				    	System.out.println(chapter.arabicToRoman(chapter.number));
+				    	System.out.println("Rozdział " + chapter.arabicToRoman(chapter.number));
 				    	System.out.println(chapter.title);
-				    	System.out.println();
+				    	//System.out.println();
 				    	continue;
 			    	}
 				    if(line.startsWith("Art")) {
@@ -67,9 +87,9 @@ public class KonstytucjaParser {
 					    	artnumber++;
 					    	article = new Article(artnumber);
 					    	chapter.articles.add(article);
-					    	article.readArticle(chapter.articles, reader, artnumber);
-					    	article.printArticle();
-					    	System.out.println();
+					    	//article.readArticle(chapter.articles, reader, artnumber);
+					    	//article.printArticle();
+					    	//System.out.println();
 					    	continue;
 				    	} 				    		
 				    }

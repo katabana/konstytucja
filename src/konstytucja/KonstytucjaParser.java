@@ -55,6 +55,7 @@ public class KonstytucjaParser {
 	public void konParse(KonstytucjaParser konstytucja) {
 		
 		ArrayList<String> file = konstytucja.cleanFile(this);
+		String line = "";
 		
 		/*System.out.println("Enter file path: ");
 		Scanner scanner = new Scanner(System.in);
@@ -63,15 +64,12 @@ public class KonstytucjaParser {
 		scanner.close(); */
 			        
 		if(file != null){
-			while ((line = file.) != null) {
+			for(int i = 0; i < file.size() -1; i++) {
+					line = file.get(i);
 			    	Chapter chapter = null;
 			    	Article article = null;
 			    	int number;
 			    	
-			    	if (line.startsWith("©")) {
-			    		reader.readLine();
-			    		continue;
-			    	}
 			    	if(line.startsWith("Rozdzia")) {
 			    		chapter = new Chapter(chapters.size()+1);
 				    	line = reader.readLine();

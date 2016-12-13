@@ -26,6 +26,7 @@ public class KonstytucjaParser {
 		
 		String filePath = konstytucja.filePath;
 		String range = konstytucja.range;
+		int artnumber = 0;
 		
 		BufferedReader reader = null;
 		
@@ -55,20 +56,21 @@ public class KonstytucjaParser {
 			    		chapter = new Chapter(chapters.size()+1);
 				    	line = reader.readLine();
 				    	chapter.title = line;
-				    	System.out.println(chapter.title);
 				    	this.chapters.add(chapter);
 				    	System.out.println(chapter.arabicToRoman(chapter.number));
+				    	System.out.println(chapter.title);
+				    	System.out.println();
 				    	continue;
 			    	}
 				    if(line.startsWith("Art")) {
 				    	chapter = chapters.get(chapters.size()-1);
 				    	if(chapter.articles != null) {
-				    		System.out.println("czytam artykul");
-					    	number = chapter.articles.size()+1;
-					    	article = new Article(number);
-					    	article.readArticle(chapter.articles, reader, number);
+					    	artnumber++;
+					    	article = new Article(artnumber);
 					    	chapter.articles.add(article);
+					    	article.readArticle(chapter.articles, reader, artnumber);
 					    	article.printArticle();
+					    	System.out.println();
 					    	continue;
 				    	} 				    		
 				    }

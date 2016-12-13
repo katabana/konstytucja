@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+
+//TODO: zle wypisuje artykuly
+//psuje sie chyba tylko przy @...
 public class Article {
 	public int number;
 	public String text;
@@ -13,18 +16,32 @@ public class Article {
 	public Article(int number) {
 		this.number = number;
 		this.text = "";
+		this.points = new ArrayList<String>();
 	}
 	
 	public Article(int number, String text) {
 		this.number = number;
 		this.text = text;
+		this.points = new ArrayList<String>();
 	}
 	
 	public ArrayList<Article> readArticle(ArrayList<Article> articles, BufferedReader reader, int number) {
 		try {
+			
 			String line = reader.readLine();
-			while(!line.startsWith("Rozdzia") || !line.startsWith("Art")) {
-				Article article = new Article(number, line);
+			//System.out.println(line);
+			this.text = line;
+			//System.out.println("tekst artykulu " +this.text);
+			reader.mark(0);
+			//System.out.println("reset readera");			
+	
+			if(line.startsWith("©")){
+				reader.readLine();
+				line = reader.readLine();
+				reader.mark(0);
+			}
+			System.out.println(line);
+			while(!line.startsWith("Rozdzia") && !line.startsWith("Art")) {
 				
 				int i = 0;
 				String tmp = "";
@@ -32,17 +49,55 @@ public class Article {
 						tmp += line.charAt(i);
 						i++;
 				}
-				if (tmp == (Integer.toString(points.size()+1) + '.')) {
-					points.add(line);
-					//while()
+				if(line.startsWith("©")){
+					reader.readLine();
+					line = reader.readLine();
+				}
+								
+				if(tmp.equals(Integer.toString(this.points.size()+1) + '.')) {
+					this.text = "";
+					String tmppoint = line;
+					String nline = line;
+					this.points.add(tmppoint);
+					while(!line.endsWith(".")){
+						
+						if(line.endsWith("-")) {
+							line = reader.readLine();
+							nline = nline.substring(0,nline.length()-2) + line;
+							this.points.set(this.points.size()-1, nline);
+						}
+						else {
+							line = reader.readLine();
+							nline += " " + line;
+							this.points.set(this.points.size()-1, nline);
+						}
+					}
 				}
 				else {
-					article.text += line;
-					article.text += "proba1";
+					String nline = line;
+					while(!line.endsWith(".")){
+						//line = reader.readLine();
+						//nline += line;
+						if(line.endsWith(":")){
+							this.text.replaceAll(":", ":\n");
+						}
+						if(line.endsWith("-")) {
+							//System.out.println(nline);
+							line = reader.readLine();
+							nline = nline.substring(0,nline.length()-2) + line;
+							this.text = nline;
+						}
+						else {
+							line = reader.readLine();
+							nline +=" " + line;
+							this.text = nline;
+						}
+					}
 				}
 				line = reader.readLine();
-				articles.add(article);
 			}
+			reader.reset();
+			
 		} catch (IOException e) {
 			e.getMessage();
 		} finally {
@@ -63,7 +118,7 @@ public class Article {
 	            System.out.println(iterator.next().toString());
 	        }
 		}
-		else System.out.println("etwasarticle");
+		else ;
 	}
 	
 }

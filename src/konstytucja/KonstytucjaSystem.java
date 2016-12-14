@@ -2,13 +2,16 @@ package konstytucja;
 
 public class KonstytucjaSystem {
 	/*
+	 * for konstytucja.txt
 	 * Arguments for main:
 	 * 
 	 * args[] :
 	 * args[0] - path to file directory
 	 * for example C:\Users\User\Documents where konstytucja.txt is in Documents
 	 * args[1] ::= "A[...] int{-int}" | "R[...] int"
-	 * for example "Rozdzial 2", "Art 2-20", "R 4"
+	 * for example "Rozdzial 2", "Art 2-20", "R 4", "A20-55","Rozdz3"
+	 * 
+	 * if is arg[1] but not in any form listed above, it prints all
 	 * 
 	 * Attention! It works only on Windows as file path is different with "/" not "\".
 	 */

@@ -59,7 +59,7 @@ public String arabicToRoman(int n){
 	
 	public void printChapter(){
 		
-		System.out.println();
+		//System.out.println();
 		System.out.println("Rozdzial " + arabicToRoman(this.number));
 		System.out.println();
 		

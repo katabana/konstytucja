@@ -92,15 +92,12 @@ public class Printer {
 						Article lastArticle = arts.get(arts.size()-1);
 						boolean inRange = lastArticle.number < start || lastArticle.number < end;
 						if (start != end && inRange) {
-							System.out.println();
 							System.out.println("Not enough articles from range");
 						}
 						if(start == end && inRange) {
-							System.out.println();
 							System.out.println("The " + start +". article does not exist");
 						}
 						if(start > end){
-							System.out.println();
 							System.out.println("Wrong range - start: "+start+", end: "+end);
 						}
 					}
@@ -114,6 +111,7 @@ public class Printer {
 		if(!this.kon.chapters.isEmpty()) {
 	        Iterator<Chapter> iterator = this.kon.chapters.iterator();
 	        while (iterator.hasNext()) {
+	        	System.out.println();
 	            iterator.next().printChapter();
 	        } 
 		} 

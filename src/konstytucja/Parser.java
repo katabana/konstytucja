@@ -96,9 +96,6 @@ public class Parser {
 			    		
 				    	chapter.title = line;
 				    	this.kon.chapters.add(chapter);
-				    	//System.out.println("Rozdział " + chapter.arabicToRoman(chapter.number));
-				    	//chapter.printChapter();
-				    	//System.out.println();
 				    	i++;
 				    	continue;
 			    	}

@@ -42,14 +42,23 @@ public class Printer {
 			this.printAll();
 		else {
 			if(tmp.startsWith("R")){
-				start = Integer.parseInt(tmp.substring(1));
-				end = start;
+				if(tmp.contains("-"))
+					System.out.println("Chapter should not be range.");
+				else {
+					start = Integer.parseInt(tmp.substring(1));
+					end = start;
+				}
 			}
 			if(tmp.startsWith("A")){
+				
 				if(tmp.contains("-")){
 					int a = tmp.indexOf("-");
 					start = Integer.parseInt(tmp.substring(1,a));
 					end = Integer.parseInt(tmp.substring(a+1));
+				}
+				else {
+					start = Integer.parseInt(tmp.substring(1));
+					end = start;
 				}
 			}
 			
@@ -58,26 +67,41 @@ public class Printer {
 				if(tmp.startsWith("R")){
 					//because indexes start from 0
 					start--;
-					if(start < chapters.size())
+					if(start >= 0 && start < chapters.size())
 						chapters.get(start).printChapter();
-					else
+					else if(start < 0) {
+						System.out.println();
+					}
+					else {
+						start++;
 						System.out.println("No such chapter " + start);
+					}
 				}
 				else {
 					for (Chapter i : chapters) {
 						if(!i.articles.isEmpty()) {
 							for (Article j : i.articles){
-								if(j.number >= start && j.number <= end)
+								if(j.number >= start && j.number <= end){
 									j.printArticle();
+								}
 							}
 						}
 					}
 					ArrayList<Article> arts = chapters.get(chapters.size()-1).articles;
 					if(!arts.isEmpty()) {
 						Article lastArticle = arts.get(arts.size()-1);
-						if (lastArticle.number < start || lastArticle.number < end) {
+						boolean inRange = lastArticle.number < start || lastArticle.number < end;
+						if (start != end && inRange) {
 							System.out.println();
 							System.out.println("Not enough articles from range");
+						}
+						if(start == end && inRange) {
+							System.out.println();
+							System.out.println("The " + start +". article does not exist");
+						}
+						if(start > end){
+							System.out.println();
+							System.out.println("Wrong range - start: "+start+", end: "+end);
 						}
 					}
 				}	

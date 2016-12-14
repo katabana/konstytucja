@@ -28,12 +28,14 @@ public class Article {
 				this.text = line;
 				//System.out.println("tekst artykulu " + this.text);
 				
-				while(!line.startsWith("Rozdzia") && !line.startsWith("Art")) {
+				while(id <= file.size() && !line.startsWith("Rozdzia") && !line.startsWith("Art")) {
 					int i = 0;
 					String tmp = "";
 					while(line.charAt(i) != ' ') {
 							tmp += line.charAt(i);
 							i++;
+							if(i == line.length())
+								break;
 					}
 									
 					if(tmp.equals(Integer.toString(this.points.size()+1) + '.')) {
@@ -56,7 +58,7 @@ public class Article {
 					}
 					else {
 						String nline = line;
-						while(!nline.endsWith(".")){
+						while(id < file.size() && !nline.endsWith(".")){
 							id++;
 							if(line.endsWith(":")){
 								this.text = this.text.substring(0,this.text.length()-2)+":\n";
@@ -77,7 +79,8 @@ public class Article {
 					}
 					
 					id++;
-					line = file.get(id);
+					if (id < file.size())
+						line = file.get(id);
 				} 
 			}
 			

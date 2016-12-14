@@ -9,28 +9,24 @@ import java.util.Scanner;
 
 //osobno wczytywanie 
 
-public class KonstytucjaParser {
+public class Parser {
 	
-	public ArrayList <Chapter> chapters;
+	public Konstytucja kon;
 	public String filePath;
-	public String range;
 	
 	
-	public KonstytucjaParser(String[] args) {
-		chapters = new ArrayList<Chapter>();
+	public Parser(String[] args) {
+		this.kon = new Konstytucja();
 		filePath = args[0];
-		range = args[1];
 	}
 	
-	public ArrayList<String> cleanFile(KonstytucjaParser konstytucja) {
-		String filePath = konstytucja.filePath;
-		String range = konstytucja.range;
+	public ArrayList<String> cleanFile() {
 		
 		BufferedReader reader = null;
 		ArrayList<String> file = new ArrayList<String>();
 		
 		try{
-		reader = new BufferedReader(new FileReader(filePath + "\\konstytucja.txt"));
+		reader = new BufferedReader(new FileReader(this.filePath + "\\konstytucja.txt"));
 		} catch (FileNotFoundException e) {
 			e.getMessage();
 		}
@@ -60,16 +56,16 @@ public class KonstytucjaParser {
 					  reader.close();
 			  } catch (IOException e) {
 				  
-}
+			  }
 	    }
 	    
 	    return file;
 	}
 	
-	public void konParse(KonstytucjaParser konstytucja) {
+	public void parse() {
 		
 		ArrayList<String> file = new ArrayList<String>();
-		file = this.cleanFile(konstytucja);
+		file = this.cleanFile();
 		String line = "";
 		int artnumber = 0;
 		
@@ -81,38 +77,33 @@ public class KonstytucjaParser {
 			        
 		if(file != null){
 			int i = 0;
-			System.out.print(file);
 			while(i < file.size() && file.get(i)!= null) {
 					line = file.get(i);
 			    	Chapter chapter = null;
 			    	Article article = null;
-			    	int number;
 			    	
 			    	if(line.startsWith("Rozdzia")) {
-			    		System.out.println();
-			    		chapter = new Chapter(this.chapters.size()+1);
+			    		chapter = new Chapter(this.kon.chapters.size()+1);
 			    		i++;
 			    		if(file.get(i) != null)
 			    			line = file.get(i);
 			    		
 				    	chapter.title = line;
-				    	this.chapters.add(chapter);
-				    	System.out.println("Rozdział " + chapter.arabicToRoman(chapter.number));
-				    	System.out.println(chapter.title);
-				    	System.out.println();
+				    	this.kon.chapters.add(chapter);
+				    	//System.out.println("Rozdział " + chapter.arabicToRoman(chapter.number));
+				    	//chapter.printChapter();
+				    	//System.out.println();
 				    	i++;
 				    	continue;
 			    	}
 				    if(line.startsWith("Art")) {
-				    	chapter = chapters.get(chapters.size()-1);
+				    	chapter = this.kon.chapters.get(this.kon.chapters.size()-1);
 				    	if(chapter.articles != null) {
 					    	artnumber++;
 					    	article = new Article(artnumber);
-					    	//System.out.println("nowy artykuł " + artnumber);
 					    	i++;
 					    	article = article.readArticle(file, i, artnumber);
 					    	chapter.articles.add(article);
-					    	article.printArticle();
 				    	} 	
 				    	continue;
 				    }

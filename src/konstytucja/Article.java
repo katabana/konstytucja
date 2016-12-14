@@ -41,18 +41,17 @@ public class Article {
 									
 					if(tmp.equals(Integer.toString(this.points.size()+1) + '.')) {
 						this.text = "";
-						String tmppoint = line;
 						String nline = line;
-						this.points.add(tmppoint);
+						this.points.add(nline);
 						while(!line.endsWith(".")){
-							
+							id++;
 							if(line.endsWith("-")) {
-								line = file.get(id+1);
+								line = file.get(id);
 								nline = nline.substring(0,nline.length()-2) + line;
 								this.points.set(this.points.size()-1, nline);
 							}
 							else {
-								line = file.get(id+1);
+								line = file.get(id);
 								nline += " " + line;
 								this.points.set(this.points.size()-1, nline);
 							}
@@ -86,10 +85,9 @@ public class Article {
 			}
 			
 		} catch (NullPointerException e){
-			
 			e.getMessage();
+			
 		}	finally {
-			System.out.println("poza wszystkim");
 			return this;
 		}
 		
@@ -98,7 +96,8 @@ public class Article {
 	public void printArticle() {
 		//prints article's parts
 		System.out.println("Art. "+ this.number);
-		System.out.println(this.text);
+		if(this.text != "")
+			System.out.println(this.text);
 		
 		//prints article's points
 		if(this.points != null && !this.points.isEmpty()) {

@@ -1,12 +1,13 @@
 package konstytucja;
 
-public class Konstytucja {
+import java.util.ArrayList;
 
-	public static void main(String args[]) {
-		
-		KonstytucjaParser konstytucja = new KonstytucjaParser(args);
-		System.out.println(konstytucja.cleanFile(konstytucja));
-		
-		
+public class Konstytucja {
+	
+	public ArrayList<Chapter> chapters;
+	
+	public Konstytucja(){
+		this.chapters = new ArrayList<Chapter>();
 	}
+
 }

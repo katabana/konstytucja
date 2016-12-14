@@ -5,14 +5,21 @@ import java.util.Iterator;
 
 
 public class Article {
-	public int number;
-	public String text;
+	private int number;
+	private String text;
 	public ArrayList<String> points;
 	
 	public Article(int number) {
 		this.number = number;
 		this.text = "";
 		this.points = new ArrayList<String>();
+	}
+	public int number(){
+		return this.number;
+	}
+	
+	public String text(){
+		return this.text;
 	}
 	
 	public Article(int number, String text) {

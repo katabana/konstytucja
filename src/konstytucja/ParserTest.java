@@ -66,7 +66,7 @@ public class ParserTest {
 		}
 		Chapter lastChapter = parser.kon.chapters.get(parser.kon.chapters.size()-1);
 		Article lastArticle = lastChapter.articles.get(lastChapter.articles.size()-1);
-		assertTrue(lastArticle.number == 243);
+		assertTrue(lastArticle.number() == 243);
 	}
 
 }

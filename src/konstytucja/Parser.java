@@ -89,12 +89,12 @@ public class Parser {
 			    	Article article = null;
 			    	
 			    	if(line.startsWith("Rozdzia")) {
-			    		chapter = new Chapter(this.kon.chapters.size()+1);
+			    		//chapter = new Chapter(this.kon.chapters.size()+1);
 			    		i++;
 			    		if(file.get(i) != null)
 			    			line = file.get(i);
 			    		
-				    	chapter.title = line;
+			    		chapter = new Chapter(this.kon.chapters.size()+1,line);
 				    	this.kon.chapters.add(chapter);
 				    	i++;
 				    	continue;

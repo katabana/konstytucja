@@ -4,16 +4,17 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Chapter {
-	public int number;
-	public String title;
+	private int number;
+	private String title;
 	public ArrayList <Article> articles;
 	
-	public Chapter(int number) {
+	public Chapter(int number, String line) {
 		this.number = number;
+		this.title = line;
 		this.articles = new ArrayList<>();
 	}
 	
-public String arabicToRoman(int n){
+private String arabicToRoman(int n){
 	
 		String number = "";
 		while(n > 0){

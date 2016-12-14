@@ -44,10 +44,8 @@ public class KonstytucjaSystem {
 				
 				if (printer.range == null)
 					printer.printAll();
-				else {
-					printer.getRange();
+				else 
 					printer.printRange();
-				}
 			}
 			else
 				System.out.println("parser pusty");

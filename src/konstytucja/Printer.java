@@ -13,7 +13,7 @@ public class Printer {
 		this.range = args[1];
 	}
 	
-	public String getRange(){
+	private String getRange(){
 		String tmp = this.range;
 		if(tmp.startsWith("R")) {
 			int i = 0;
@@ -81,7 +81,7 @@ public class Printer {
 					for (Chapter i : chapters) {
 						if(!i.articles.isEmpty()) {
 							for (Article j : i.articles){
-								if(j.number >= start && j.number <= end){
+								if(j.number() >= start && j.number() <= end){
 									j.printArticle();
 								}
 							}
@@ -90,7 +90,7 @@ public class Printer {
 					ArrayList<Article> arts = chapters.get(chapters.size()-1).articles;
 					if(!arts.isEmpty()) {
 						Article lastArticle = arts.get(arts.size()-1);
-						boolean inRange = lastArticle.number < start || lastArticle.number < end;
+						boolean inRange = lastArticle.number() < start || lastArticle.number() < end;
 						if (start != end && inRange) {
 							System.out.println("Not enough articles from range");
 						}

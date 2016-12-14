@@ -38,10 +38,10 @@ public class KonstytucjaSystem {
 			Parser parser = new Parser(args);
 			if(!parser.parse())
 				System.out.println("The file was not parsed properly.");
-			if(parser.kon != null) {
-				Printer printer = new Printer(args, parser.kon);
+			if(parser.getKon() != null) {
+				Printer printer = new Printer(args, parser.getKon());
 				
-				if (printer.range == null)
+				if (printer.getRange() == null)
 					printer.printAll();
 				else 
 					printer.printRange();

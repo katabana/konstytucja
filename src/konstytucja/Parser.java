@@ -7,10 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
 public class Parser {
 	
-	public Konstytucja kon;
+	private Konstytucja kon;
 	private String filePath;
 	private String message;
 	
@@ -27,6 +26,10 @@ public class Parser {
 	
 	public void setMessage(String msg){
 		this.message = msg;
+	}
+	
+	public Konstytucja getKon(){
+		return this.kon;
 	}
 	
 	//reads file, save as Strings Array and delete every occurence of two unnecessary lines
@@ -101,13 +104,14 @@ public class Parser {
 			    		if(file.get(i) != null)
 			    			line = file.get(i);
 			    		
-			    		chapter = new Chapter(this.kon.chapters.size()+1,line);
-				    	this.kon.chapters.add(chapter);
+			    		chapter = new Chapter(this.kon.getChapters().size()+1,line);
+			    		
+				    	this.kon.getChapters().add(chapter);
 				    	i++;
 				    	continue;
 			    	}
 				    if(line.startsWith("Art")) {
-				    	chapter = this.kon.chapters.get(this.kon.chapters.size()-1);
+				    	chapter = this.kon.getChapters().get(this.kon.getChapters().size()-1);
 				    	if(chapter.getArticles() != null) {
 					    	artnumber++;
 					    	article = new Article(artnumber);

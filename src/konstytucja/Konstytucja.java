@@ -4,10 +4,14 @@ import java.util.ArrayList;
 
 public class Konstytucja {
 	
-	public ArrayList<Chapter> chapters;
+	private ArrayList<Chapter> chapters;
 	
 	public Konstytucja(){
 		this.chapters = new ArrayList<Chapter>();
+	}
+	
+	public ArrayList<Chapter> getChapters(){
+		return this.chapters;
 	}
 
 }

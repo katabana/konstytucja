@@ -10,7 +10,7 @@ public class KonstytucjaTest {
 	public void test() {
 		Konstytucja kon = new Konstytucja();
 		assertFalse(kon == null);
-		assertFalse(kon.chapters == null);
+		assertFalse(kon.getChapters() == null);
 	}
 
 }

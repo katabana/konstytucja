@@ -59,12 +59,12 @@ public class ParserTest {
 		Parser parser = new Parser(args1);
 		
 		assertTrue(parser.parse());
-		assertFalse(parser.kon.chapters.isEmpty());
-		assertTrue(parser.kon.chapters.size() == 13);
-		for (Chapter i : parser.kon.chapters) {
+		assertFalse(parser.getKon().getChapters().isEmpty());
+		assertTrue(parser.getKon().getChapters().size() == 13);
+		for (Chapter i : parser.getKon().getChapters()) {
 			assertFalse(i.getArticles().isEmpty());
 		}
-		Chapter lastChapter = parser.kon.chapters.get(parser.kon.chapters.size()-1);
+		Chapter lastChapter = parser.getKon().getChapters().get(parser.getKon().getChapters().size()-1);
 		Article lastArticle = lastChapter.getArticles().get(lastChapter.getArticles().size()-1);
 		assertTrue(lastArticle.getNumber() == 243);
 	}

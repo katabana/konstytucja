@@ -5,15 +5,19 @@ import java.util.Iterator;
 
 public class Printer {
 	
-	public Konstytucja kon;
-	public String range;
+	private Konstytucja kon;
+	private String range;
 	
 	public Printer(String[] args, Konstytucja kon){
 		this.kon = kon;
 		this.range = args[1];
 	}
 	
-	private String getRange(){
+	public String getRange(){
+		return this.range;
+	}
+	
+	private String findRange(){
 		String tmp = this.range;
 		if(tmp.startsWith("R")) {
 			int i = 0;
@@ -37,7 +41,7 @@ public class Printer {
 	public void printRange(){
 		int start = 0;
 		int end = 0;
-		String tmp = this.getRange();
+		String tmp = this.findRange();
 		if(tmp == null)
 			this.printAll();
 		else {
@@ -62,8 +66,8 @@ public class Printer {
 				}
 			}
 			
-			if(!this.kon.chapters.isEmpty()) {
-				ArrayList<Chapter> chapters = this.kon.chapters;
+			if(!this.kon.getChapters().isEmpty()) {
+				ArrayList<Chapter> chapters = this.kon.getChapters();
 				if(tmp.startsWith("R")){
 					//because indexes start from 0
 					start--;
@@ -107,9 +111,9 @@ public class Printer {
 	}
 	
 	public void printAll(){
-		//subList(int fromIndex, int toIndex)
-		if(!this.kon.chapters.isEmpty()) {
-	        Iterator<Chapter> iterator = this.kon.chapters.iterator();
+		
+		if(!this.kon.getChapters().isEmpty()) {
+	        Iterator<Chapter> iterator = this.kon.getChapters().iterator();
 	        while (iterator.hasNext()) {
 	        	System.out.println();
 	            iterator.next().printChapter();

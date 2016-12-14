@@ -52,7 +52,17 @@ public class ParserTest {
 	
 	@Test
 	public void parseTest() {
+		//when file "konstytucja.txt" is in C:\Users\Kasia\Java\projekty\projekty
+		String[] args1 = new String[2];
+		args1[0] = "C:\\Users\\Kasia\\Java\\projekty\\projekty";
+		args1[1] = "R   3";
+		Parser parser = new Parser(args1);
 		
+		assertTrue(parser.parse());
+		parser.parse();
+		assertFalse(parser.kon.chapters.isEmpty());
+		System.out.println(parser.kon.chapters.size());
+		//assertTrue(parser.kon.chapters.size() == 13);
 	}
 
 }

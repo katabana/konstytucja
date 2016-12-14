@@ -59,14 +59,17 @@ public String arabicToRoman(int n){
 	
 	public void printChapter(){
 		//prints chapter's parts
+		System.out.println();
 		System.out.println("Rozdzial " + arabicToRoman(this.number));
 		//System.out.println(this.title);
+		System.out.println();
 		
 		//prints chapter's articles
 		if(!this.articles.isEmpty()) {
 	        Iterator<Article> iterator = this.articles.iterator();
 	        while (iterator.hasNext()) {
 	            iterator.next().printArticle();
+	            System.out.println();
 	        } 
 		} 
 	}

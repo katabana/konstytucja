@@ -18,22 +18,34 @@ public class KonstytucjaSystem {
 	//TODO: tests
 	public static void main(String[] args) {
 		
-		Parser parser = new Parser(args);
-		if(!parser.parse())
-			System.out.println("The file was not parsed properly.");
-		if(parser.kon != null) {
-			Printer printer = new Printer(args, parser.kon);
-			
-			if (printer.range == null)
-				printer.printAll();
-			else {
-				printer.getRange();
-				printer.printRange();
+		boolean validArgs = true;
+		if(args != null){
+			if(args.length != 0)
+				validArgs = args[0] != null;
+			if(args.length != 1)
+				validArgs = args[1] != null;
+			else validArgs = false;
+		}
+		
+		if(validArgs){
+			Parser parser = new Parser(args);
+			if(!parser.parse())
+				System.out.println("The file was not parsed properly.");
+			if(parser.kon != null) {
+				Printer printer = new Printer(args, parser.kon);
+				
+				if (printer.range == null)
+					printer.printAll();
+				else {
+					printer.getRange();
+					printer.printRange();
+				}
 			}
+			else
+				System.out.println("parser pusty");
 		}
 		else
-			System.out.println("parser pusty");
-		
+			System.out.println("Not enough arguments");
 		
 		
 	}

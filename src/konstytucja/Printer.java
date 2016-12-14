@@ -61,6 +61,8 @@ public class Printer {
 					start--;
 					if(start < chapters.size())
 						chapters.get(start).printChapter();
+					else
+						System.out.println("No such chapter " + start);
 				}
 				else {
 					for (Chapter i : chapters) {
@@ -70,6 +72,13 @@ public class Printer {
 									j.printArticle();
 							}
 						}
+					}
+					ArrayList<Article> arts = chapters.get(chapters.size()-1).articles;
+					if(!arts.isEmpty()) {
+						Article lastArticle = arts.get(arts.size()-1);
+						if (lastArticle.number < end)
+							System.out.println();
+							System.out.println("Not enough articles from range");
 					}
 				}	
 			}

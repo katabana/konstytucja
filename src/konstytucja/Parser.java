@@ -89,7 +89,6 @@ public class Parser {
 			    	Article article = null;
 			    	
 			    	if(line.startsWith("Rozdzia")) {
-			    		//chapter = new Chapter(this.kon.chapters.size()+1);
 			    		i++;
 			    		if(file.get(i) != null)
 			    			line = file.get(i);
@@ -101,12 +100,12 @@ public class Parser {
 			    	}
 				    if(line.startsWith("Art")) {
 				    	chapter = this.kon.chapters.get(this.kon.chapters.size()-1);
-				    	if(chapter.articles != null) {
+				    	if(chapter.getArticles() != null) {
 					    	artnumber++;
 					    	article = new Article(artnumber);
 					    	i++;
 					    	article = article.readArticle(file, i);
-					    	chapter.articles.add(article);
+					    	chapter.getArticles().add(article);
 				    	} 	
 				    	continue;
 				    }

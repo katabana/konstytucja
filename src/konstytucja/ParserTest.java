@@ -62,11 +62,11 @@ public class ParserTest {
 		assertFalse(parser.kon.chapters.isEmpty());
 		assertTrue(parser.kon.chapters.size() == 13);
 		for (Chapter i : parser.kon.chapters) {
-			assertFalse(i.articles.isEmpty());
+			assertFalse(i.getArticles().isEmpty());
 		}
 		Chapter lastChapter = parser.kon.chapters.get(parser.kon.chapters.size()-1);
-		Article lastArticle = lastChapter.articles.get(lastChapter.articles.size()-1);
-		assertTrue(lastArticle.number() == 243);
+		Article lastArticle = lastChapter.getArticles().get(lastChapter.getArticles().size()-1);
+		assertTrue(lastArticle.getNumber() == 243);
 	}
 
 }

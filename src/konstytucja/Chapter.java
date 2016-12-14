@@ -6,7 +6,7 @@ import java.util.Iterator;
 public class Chapter {
 	private int number;
 	private String title;
-	public ArrayList <Article> articles;
+	private ArrayList <Article> articles;
 	
 	public Chapter(int number, String line) {
 		this.number = number;
@@ -14,7 +14,11 @@ public class Chapter {
 		this.articles = new ArrayList<>();
 	}
 	
-private String arabicToRoman(int n){
+	public ArrayList<Article> getArticles(){
+		return this.articles;
+	}
+	
+	private String arabicToRoman(int n){
 	
 		String number = "";
 		while(n > 0){
@@ -60,7 +64,6 @@ private String arabicToRoman(int n){
 	
 	public void printChapter(){
 		
-		//System.out.println();
 		System.out.println("Rozdzial " + arabicToRoman(this.number));
 		System.out.println();
 		

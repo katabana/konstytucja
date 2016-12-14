@@ -7,19 +7,23 @@ import java.util.Iterator;
 public class Article {
 	private int number;
 	private String text;
-	public ArrayList<String> points;
+	private ArrayList<String> points;
 	
 	public Article(int number) {
 		this.number = number;
 		this.text = "";
 		this.points = new ArrayList<String>();
 	}
-	public int number(){
+	public int getNumber(){
 		return this.number;
 	}
 	
-	public String text(){
+	public String getText(){
 		return this.text;
+	}
+	
+	public ArrayList<String> getPoints() {
+		return this.points;
 	}
 	
 	public Article(int number, String text) {

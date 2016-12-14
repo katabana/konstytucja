@@ -79,18 +79,18 @@ public class Printer {
 				}
 				else {
 					for (Chapter i : chapters) {
-						if(!i.articles.isEmpty()) {
-							for (Article j : i.articles){
-								if(j.number() >= start && j.number() <= end){
+						if(!i.getArticles().isEmpty()) {
+							for (Article j : i.getArticles()){
+								if(j.getNumber() >= start && j.getNumber() <= end){
 									j.printArticle();
 								}
 							}
 						}
 					}
-					ArrayList<Article> arts = chapters.get(chapters.size()-1).articles;
+					ArrayList<Article> arts = chapters.get(chapters.size()-1).getArticles();
 					if(!arts.isEmpty()) {
 						Article lastArticle = arts.get(arts.size()-1);
-						boolean inRange = lastArticle.number() < start || lastArticle.number() < end;
+						boolean inRange = lastArticle.getNumber() < start || lastArticle.getNumber() < end;
 						if (start != end && inRange) {
 							System.out.println("Not enough articles from range");
 						}

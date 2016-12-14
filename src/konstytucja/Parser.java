@@ -11,14 +11,22 @@ import java.util.Scanner;
 public class Parser {
 	
 	public Konstytucja kon;
-	public String filePath;
-	public String message;
+	private String filePath;
+	private String message;
 	
 	
 	public Parser(String[] args) {
 		this.kon = new Konstytucja();
 		this.filePath = args[0];
 		this.message = "";
+	}
+	
+	public String getMessage(){
+		return this.message;
+	}
+	
+	public void setMessage(String msg){
+		this.message = msg;
 	}
 	
 	//reads file, save as Strings Array and delete every occurence of two unnecessary lines
@@ -48,8 +56,8 @@ public class Parser {
 			}
 			
 		} catch (FileNotFoundException e) {
-			this.message = e.getMessage();
-			System.out.println(this.message);
+			this.setMessage(e.getMessage());
+			System.out.println(this.getMessage());
 			return null;
 		} 
 	    finally {

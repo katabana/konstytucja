@@ -45,7 +45,7 @@ public class ParserTest {
 	    
 	    Parser parser3 = new Parser(args3);
 	    parser3.cleanFile();
-	    assertEquals(parser3.message, "C:\\Users\\Kasia\\Java\\proje\\konstytucja.txt (The system cannot find the path specified)");
+	    assertEquals(parser3.getMessage(), "C:\\Users\\Kasia\\Java\\proje\\konstytucja.txt (The system cannot find the path specified)");
 	
 	
 	}

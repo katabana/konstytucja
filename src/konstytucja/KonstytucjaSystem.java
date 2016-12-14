@@ -16,7 +16,6 @@ public class KonstytucjaSystem {
 	 * Attention! It works only on Windows as file path is different with "/" not "\".
 	 */
 
-	//TODO: tests
 	public static void main(String[] args) {
 		
 		boolean validArgs = true;

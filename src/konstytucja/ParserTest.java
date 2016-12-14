@@ -2,12 +2,14 @@ package konstytucja;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 public class ParserTest {
 
 	@Test
-	public void ArgumentTest() {
+	public void cleanFileTest() {
 		
 		//when file "konstytucja.txt" is in C:\Users\Kasia\Java\projekty\projekty
 		String[] args1 = new String[2];
@@ -17,6 +19,15 @@ public class ParserTest {
 	    Parser parser = new Parser(args1);
 	    
 	    assertFalse(parser.cleanFile().isEmpty());
+	    
+	    ArrayList<String> file = parser.cleanFile();
+	    boolean wronglines = false;
+	    for (String i : file) {
+	    	if (i.startsWith("©"))
+	    		wronglines = true;
+	    }
+	    
+	    assertFalse(wronglines);
 	    
 	    //when empty file "konstytucja.txt" is in C:\Users\Kasia\Java\projekty
 	    String[] args2 = new String[2];
@@ -36,8 +47,12 @@ public class ParserTest {
 	    parser3.cleanFile();
 	    assertEquals(parser3.message, "C:\\Users\\Kasia\\Java\\proje\\konstytucja.txt (The system cannot find the path specified)");
 	
-	    
 	
+	}
+	
+	@Test
+	public void parseTest() {
+		
 	}
 
 }

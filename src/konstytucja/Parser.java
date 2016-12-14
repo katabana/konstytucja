@@ -28,24 +28,24 @@ public class Parser {
 		ArrayList<String> file = new ArrayList<String>();
 		
 		try{
-		reader = new BufferedReader(new FileReader(this.filePath + "\\konstytucja.txt"));
-		
-		String line = null;
-		while((line = reader.readLine()) != null ){
-			if(line.startsWith("Rozdzia")) {
-	       		file.add(line);
-	       		break;
-	        }
-		}
-		while((line = reader.readLine()) != null) {
-				
-			if (line.startsWith("©")) {
-				reader.readLine();
-				continue;
+			reader = new BufferedReader(new FileReader(this.filePath + "\\konstytucja.txt"));
+			
+			String line = null;
+			while((line = reader.readLine()) != null ){
+				if(line.startsWith("Rozdzia")) {
+		       		file.add(line);
+		       		break;
+		        }
 			}
-			else
-				file.add(line);
-		}
+			while((line = reader.readLine()) != null) {
+					
+				if (line.startsWith("©")) {
+					reader.readLine();
+					continue;
+				}
+				else
+					file.add(line);
+			}
 			
 		} catch (FileNotFoundException e) {
 			this.message = e.getMessage();
@@ -62,6 +62,7 @@ public class Parser {
 	    	 
 	    	 return file;
 	    }
+		
 	    
 	}
 	

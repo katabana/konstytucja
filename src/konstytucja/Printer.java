@@ -1,7 +1,6 @@
 package konstytucja;
 
 import java.util.ArrayList;
-import java.util.AbstractList;
 import java.util.Iterator;
 
 public class Printer {

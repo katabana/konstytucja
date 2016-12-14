@@ -1,12 +1,9 @@
 package konstytucja;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 
-//TODO: zle wypisuje artykuly
-//psuje sie chyba tylko przy @...
 public class Article {
 	public int number;
 	public String text;
@@ -87,10 +84,8 @@ public class Article {
 		} catch (NullPointerException e){
 			e.getMessage();
 			
-		}	finally {
-			return this;
 		}
-		
+		return this;
 	}
 	
 	public void printArticle() {

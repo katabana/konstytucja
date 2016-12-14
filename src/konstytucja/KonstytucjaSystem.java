@@ -1,7 +1,5 @@
 package konstytucja;
 
-import java.util.ArrayList;
-
 public class KonstytucjaSystem {
 	/*
 	 * Arguments for main:

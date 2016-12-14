@@ -7,19 +7,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-//osobno wczytywanie 
 
 public class Parser {
 	
 	public Konstytucja kon;
 	public String filePath;
+	public String message;
 	
 	
 	public Parser(String[] args) {
 		this.kon = new Konstytucja();
-		filePath = args[0];
+		this.filePath = args[0];
+		this.message = "";
 	}
 	
+	//reads file, save as Strings Array and delete every occurence of two unnecessary lines
 	public ArrayList<String> cleanFile() {
 		
 		BufferedReader reader = null;
@@ -28,8 +30,10 @@ public class Parser {
 		try{
 		reader = new BufferedReader(new FileReader(this.filePath + "\\konstytucja.txt"));
 		} catch (FileNotFoundException e) {
-			e.getMessage();
-		}
+			this.message = e.getMessage();
+			System.out.println(this.message);
+			return null;
+		} 
 	    try {
 	        String line = null;
 	        while((line = reader.readLine()) != null ){
@@ -47,6 +51,7 @@ public class Parser {
 				else
 					file.add(line);
 			}
+			
 	    } catch (IOException e) {
 	    	e.getMessage();
 	    }
@@ -55,19 +60,21 @@ public class Parser {
 				  if (reader != null) 
 					  reader.close();
 			  } catch (IOException e) {
-				  
+				  System.out.println(e.getMessage());
 			  }
+	    	 
+	    	 return file;
 	    }
 	    
-	    return file;
 	}
 	
-	public void parse() {
+	public boolean parse() {
 		
 		ArrayList<String> file = new ArrayList<String>();
 		file = this.cleanFile();
 		String line = "";
 		int artnumber = 0;
+		boolean parsed = false;
 		
 		/*System.out.println("Enter file path: ");
 		Scanner scanner = new Scanner(System.in);
@@ -75,8 +82,9 @@ public class Parser {
 		range = scanner.nextLine();
 		scanner.close(); */
 			        
-		if(file != null){
+		if(file != null && !file.isEmpty()){
 			int i = 0;
+			parsed = true;
 			while(i < file.size() && file.get(i)!= null) {
 					line = file.get(i);
 			    	Chapter chapter = null;
@@ -111,7 +119,8 @@ public class Parser {
 			    
 			    }
 			    
-			}
-		return ; 
+		}
+		
+		return parsed; 
 	} 
 } 

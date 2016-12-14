@@ -29,32 +29,29 @@ public class Parser {
 		
 		try{
 		reader = new BufferedReader(new FileReader(this.filePath + "\\konstytucja.txt"));
+		
+		String line = null;
+		while((line = reader.readLine()) != null ){
+			if(line.startsWith("Rozdzia")) {
+	       		file.add(line);
+	       		break;
+	        }
+		}
+		while((line = reader.readLine()) != null) {
+				
+			if (line.startsWith("©")) {
+				reader.readLine();
+				continue;
+			}
+			else
+				file.add(line);
+		}
+			
 		} catch (FileNotFoundException e) {
 			this.message = e.getMessage();
 			System.out.println(this.message);
 			return null;
 		} 
-	    try {
-	        String line = null;
-	        while((line = reader.readLine()) != null ){
-	        	if(line.startsWith("Rozdzia")) {
-	        		file.add(line);
-	        		break;
-	        	}
-			}
-			while((line = reader.readLine()) != null) {
-			
-				if (line.startsWith("©")) {
-					reader.readLine();
-					continue;
-				}
-				else
-					file.add(line);
-			}
-			
-	    } catch (IOException e) {
-	    	e.getMessage();
-	    }
 	    finally {
 	    	 try{
 				  if (reader != null) 

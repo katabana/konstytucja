@@ -26,8 +26,8 @@ public class ParserTest {
 	    	if (i.startsWith("©"))
 	    		wronglines = true;
 	    }
-	    
 	    assertFalse(wronglines);
+	    assertEquals(file.get(0), "Rozdział I");
 	    
 	    //when empty file "konstytucja.txt" is in C:\Users\Kasia\Java\projekty
 	    String[] args2 = new String[2];

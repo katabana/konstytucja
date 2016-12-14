@@ -58,10 +58,9 @@ public String arabicToRoman(int n){
 	}
 	
 	public void printChapter(){
-		//prints chapter's parts
+		
 		System.out.println();
 		System.out.println("Rozdzial " + arabicToRoman(this.number));
-		//System.out.println(this.title);
 		System.out.println();
 		
 		//prints chapter's articles

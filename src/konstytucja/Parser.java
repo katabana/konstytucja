@@ -107,7 +107,7 @@ public class Parser {
 					    	artnumber++;
 					    	article = new Article(artnumber);
 					    	i++;
-					    	article = article.readArticle(file, i, artnumber);
+					    	article = article.readArticle(file, i);
 					    	chapter.articles.add(article);
 				    	} 	
 				    	continue;

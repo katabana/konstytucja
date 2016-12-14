@@ -24,7 +24,7 @@ public class Article {
 		this.points = new ArrayList<String>();
 	}
 	
-	public Article readArticle(ArrayList<String> file, int id, int number) {
+	public Article readArticle(ArrayList<String> file, int id) {
 		try {
 			if(id < file.size() && file.get(id) != null) {
 				String line = file.get(id);
@@ -47,7 +47,7 @@ public class Article {
 							id++;
 							if(line.endsWith("-")) {
 								line = file.get(id);
-								nline = nline.substring(0,nline.length()-2) + line;
+								nline = nline.substring(0,nline.length()-1) + line;
 								this.points.set(this.points.size()-1, nline);
 							}
 							else {
@@ -67,7 +67,7 @@ public class Article {
 							if(line.endsWith("-")) {
 								//System.out.println(nline);
 								line = file.get(id);
-								nline = nline.substring(0,nline.length()-2) + line;
+								nline = nline.substring(0,nline.length()-1) + line;
 								this.text = nline;
 							}
 							else {
